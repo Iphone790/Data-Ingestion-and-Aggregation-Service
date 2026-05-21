@@ -176,6 +176,135 @@ Implemented protections:
 
 ---
 
+# API Usage Examples
+
+## 1. Create Single Event
+
+### Endpoint
+
+POST /api/events
+
+### Example Request
+
+```json
+{
+  "event_id": "event_001",
+  "tenant_id": "tenant_1",
+  "source": "web",
+  "event_type": "click",
+  "timestamp": "2026-05-21T10:00:00Z",
+  "payload": {
+    "button": "signup"
+  }
+}
+```
+
+---
+
+## 2. Bulk Event Ingestion
+
+### Endpoint
+
+POST /api/events/bulk
+
+### Example Request
+
+```json
+{
+  "events": [
+    {
+      "event_id": "bulk_1",
+      "tenant_id": "tenant_1",
+      "event_type": "view",
+      "source": "web",
+      "timestamp": "2026-05-22T10:00:00Z",
+      "payload": {
+        "page": "home"
+      }
+    },
+    {
+      "event_id": "bulk_2",
+      "tenant_id": "tenant_1",
+      "event_type": "click",
+      "source": "mobile",
+      "timestamp": "2026-05-22T10:01:00Z",
+      "payload": {
+        "button": "signup"
+      }
+    }
+  ]
+}
+```
+
+---
+
+## 3. List Events
+
+### Endpoint
+
+GET /api/events/list
+
+### Example
+
+```bash
+http://127.0.0.1:8000/api/events/list?tenant_id=tenant_1
+```
+
+### Optional Filters
+
+- source
+- event_type
+- from
+- to
+
+Example:
+
+```bash
+http://127.0.0.1:8000/api/events/list?tenant_id=tenant_1&source=mobile
+```
+
+---
+
+## 4. Metrics API
+
+### Endpoint
+
+GET /api/metrics
+
+### Example
+
+```bash
+http://127.0.0.1:8000/api/metrics?tenant_id=tenant_1
+```
+
+### Minute Aggregation
+
+```bash
+http://127.0.0.1:8000/api/metrics?tenant_id=tenant_1&bucket_size=minute
+```
+
+### Hour Aggregation
+
+```bash
+http://127.0.0.1:8000/api/metrics?tenant_id=tenant_1&bucket_size=hour
+```
+
+---
+
+## 5. Health Check
+
+```bash
+http://127.0.0.1:8000/api/health
+```
+
+---
+
+## 6. Readiness Check
+
+```bash
+http://127.0.0.1:8000/api/ready
+```
+
 # Local Setup
 
 ## 1. Clone Repository
